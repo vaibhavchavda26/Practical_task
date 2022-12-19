@@ -11,8 +11,8 @@
 
     <div class="m-3">
         <div class="container" style="text-align: center;">
-            <a href="/"><button type="button" >List of opportunities</button></a>
             <h2>Opportunity Create Form</h2>
+            <a href="/"><button type="button" >List of opportunities</button></a>
             <div>
                 <form method="post">
                     {% csrf_token %}
@@ -24,18 +24,18 @@
                         <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.address2|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.city|as_crispy_field }}</div>
-                        <div class="col-md-6">{{ form.province|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.postal_code|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.phone_number1|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.phone_number2|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.email|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.sin|as_crispy_field }}</div>
-                        <div class="col-md-6">{{ form.dob|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.agent|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.collection_amount|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.collection_date|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.last_agent|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.last_crawl|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.province|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.dob|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.last_result|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.prioritize_local|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.prioritize_global|as_crispy_field }}</div>
@@ -44,7 +44,11 @@
 
                     </div>
 
+<<<<<<< HEAD
                     <div class="row mt-5 w-100">
+=======
+                    <div class="row mt-4 w-100">
+>>>>>>> e58e3e4359d0b76a320e8c598fd4666a5310558b
                         <div class="col-md-4 mt-3 mt-lg-0">
                             <input type="submit" value="Save">
                         </div>
