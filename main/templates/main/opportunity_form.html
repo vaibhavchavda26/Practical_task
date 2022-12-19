@@ -1,0 +1,69 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Opportunity Create Form</title>
+</head>
+<body style="background-color: lightgrey">
+
+    <div class="m-3">
+        <div class="container" style="text-align: center;">
+            <a href="/"><button type="button" >List of opportunities</button></a>
+            <h2>Opportunity Create Form</h2>
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row mt-5">
+
+                        <div class="col-md-6">{{ form.first_name|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.last_name|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.address2|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.city|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.province|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.postal_code|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.phone_number1|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.phone_number2|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.email|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.sin|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.dob|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.agent|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.collection_amount|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.collection_date|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.last_agent|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.last_crawl|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.last_result|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.prioritize_local|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.prioritize_global|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.file_upload|as_crispy_field }}</div>
+
+
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-md-3 mt-3 mt-lg-0">
+                            <input type="submit" value="Save">
+                        </div>
+
+                        {% if create == "create" %}
+                        <div class="col-md-3 mt-3 mt-lg-0"><button type="submit" formaction="create/new">Save and Create</button></div>
+                        <div class="col-md-3 mt-3 mt-lg-0"><button type="submit" formaction="create/edit">Save and Edit</button></div>
+                        {% else %}
+                        <div class="col-md-3 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/new/{{id}}">Update and Create New</button></div>
+                        <div class="col-md-3 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/edit/{{id}}">Update and Edit</button></div>
+                        {% endif %}
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

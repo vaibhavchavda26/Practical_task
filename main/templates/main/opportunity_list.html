@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunity</title>
+
+</head>
+<body style="background-color: lightgray ">
+  <div class="m-3">
+    <div>
+      <a href="/opportunity/create"><button type="button" >Add opportunities</button></a>
+
+    <h2 >All Opportunities</h2>
+          <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Dob</th>
+                  <th scope="col">Sin</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Link</th>
+                </tr>
+              </thead>
+              <tbody>
+          {% for opportunity in object_list %}
+                <tr>
+                  <th scope="row">{{ opportunity.id }}</th>
+                  <td><a>{{ opportunity.first_name }}</a></td>
+                  <td>{{ opportunity.last_name }}</td>
+                  <td>{{ opportunity.dob }}</td>
+                  <td>{{ opportunity.sin }}</td>
+                  <td>{{ opportunity.email }}</td>
+                    <td><a href="/opportunity/{{opportunity.id}}" role="button">Link</a></td>
+                </tr>
+          {% endfor %}
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+
+</body>
+</html>
