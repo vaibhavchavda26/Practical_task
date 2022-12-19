@@ -17,7 +17,6 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="row mt-5">
-
                         <div class="col-md-6">{{ form.first_name|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.last_name|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
@@ -40,8 +39,6 @@
                         <div class="col-md-6">{{ form.prioritize_local|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.prioritize_global|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.file_upload|as_crispy_field }}</div>
-
-
                     </div>
 
                     <div class="row mt-4 w-100">
@@ -52,6 +49,7 @@
                         {% if create == "create" %}
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="create/new">Save and Create</button></div>
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="create/edit">Save and Edit</button></div>
+
                         {% else %}
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/new/{{id}}">Update and Create New</button></div>
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/edit/{{id}}">Update and Edit</button></div>
