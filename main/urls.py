@@ -20,6 +20,11 @@ urlpatterns = [
         name="opportunity_update"
     ),
     path(
+        "update_create/<int:pk>",
+        OpportunityUpdateCreateView.as_view(),
+        name="oppo_update"
+    ),
+    path(
         'create/new',
         OpportunitySaveCreateNew.as_view(),
         name="save_and_create_new"

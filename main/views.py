@@ -4,9 +4,63 @@ from django.urls import reverse_lazy
 from django.forms import DateInput, DateTimeInput, NumberInput
 
 
+# ===================================================================
+# Common Utilities
+# ===================================================================
+def get_form(class_instance, class_defination, form_class=None):
+    if form_class is None:
+        form_class = class_instance.get_form_class()
+
+    form = super(class_defination, class_instance).get_form(form_class)
+    form.fields['first_name'].widget.attrs = {}
+    form.fields['last_name'].widget.attrs = {}
+    form.fields['address1'].widget.attrs = {}
+    form.fields['address2'].widget.attrs = {}
+    form.fields['city'].widget.attrs = {}
+    form.fields["province"].widget.attrs = {}
+    form.fields['postal_code'].widget = NumberInput(
+        attrs={"type": "number", "pattern": "[0-9]{6}"}
+        )
+    form.fields['phone_number1'].widget = NumberInput(attrs={
+        "type": "tel",
+        "pattern": "[0-9]{10}",
+    })
+    form.fields['phone_number2'].widget = NumberInput(attrs={
+        "type": "tel",
+        "pattern": "[0-9]{10}",
+    })
+    form.fields['sin'].widget = NumberInput(attrs={
+        "placeholder": "Please Enter Sin (9 DIGITS)",
+        "type": "tel",
+        "pattern": "[0-9]{9}",
+    })
+    form.fields['email'].widget.attrs = {"type": "email"}
+    form.fields['agent'].widget.attrs = {}
+    form.fields['dob'].widget = DateInput(
+        attrs={"type": "date"}
+        )
+    form.fields['collection_amount'].widget.attrs = {}
+    form.fields['last_agent'].widget.attrs = {}
+    form.fields['collection_date'].widget.attrs = {}
+    form.fields['last_crawl'].widget = DateTimeInput(
+        attrs={"type": "datetime-local"}
+        )
+    form.fields['last_result'].widget = DateInput(
+        attrs={"type": "date"}
+        )
+    form.fields["prioritize_local"].widget.attrs = {}
+    form.fields["prioritize_global"].widget.attrs = {}
+    form.fields["file_upload"].widget.attrs = { "accept": ".doc, .docx, .pdf"}
+
+    return form
+
+# ===================================================================
+# View
+# ===================================================================
 class OpportunityCreate(CreateView):
     model = Opportunity
     fields = "__all__"
+    slug_field = "id"
 
     def get_context_data(self, *args, **kwargs):
         context = super(OpportunityCreate, self).get_context_data(
@@ -15,51 +69,7 @@ class OpportunityCreate(CreateView):
         return context
 
     def get_form(self, form_class=None):
-        if form_class is None:
-            form_class = self.get_form_class()
-
-        form = super(OpportunityCreate, self).get_form(form_class)
-        form.fields['first_name'].widget.attrs = {}
-        form.fields['last_name'].widget.attrs = {}
-        form.fields['address1'].widget.attrs = {}
-        form.fields['address2'].widget.attrs = {}
-        form.fields['city'].widget.attrs = {}
-        form.fields["province"].widget.attrs = {}
-        form.fields['postal_code'].widget = NumberInput(
-            attrs={"type": "number", "pattern": "[0-9]{6}"}
-            )
-        form.fields['phone_number1'].widget = NumberInput(attrs={
-            "type": "tel",
-            "pattern": "[0-9]{10}",
-        })
-        form.fields['phone_number2'].widget = NumberInput(attrs={
-            "type": "tel",
-            "pattern": "[0-9]{10}",
-        })
-        form.fields['sin'].widget = NumberInput(attrs={
-            "placeholder": "Please Enter Sin (9 DIGITS)",
-            "type": "tel",
-            "pattern": "[0-9]{9}",
-        })
-        form.fields['email'].widget.attrs = {"type": "email"}
-        form.fields['agent'].widget.attrs = {}
-        form.fields['dob'].widget = DateInput(
-            attrs={"type": "date"}
-            )
-        form.fields['collection_amount'].widget.attrs = {}
-        form.fields['last_agent'].widget.attrs = {}
-        form.fields['collection_date'].widget.attrs = {}
-        form.fields['last_crawl'].widget = DateTimeInput(
-            attrs={"type": "datetime-local"}
-            )
-        form.fields['last_result'].widget = DateInput(
-            attrs={"type": "date"}
-            )
-        form.fields["prioritize_local"].widget.attrs = {}
-        form.fields["prioritize_global"].widget.attrs = {}
-        form.fields["file_upload"].widget.attrs = { "accept": ".doc, .docx, .pdf"}
-
-        return form
+        return get_form(self, OpportunityCreate, form_class=form_class)
 
 
 class OpportunitySaveAndEditView(OpportunityCreate):
@@ -95,63 +105,7 @@ class OpportunityUpdate(UpdateView):
         return context
 
     def get_form(self, form_class=None):
-        if form_class is None:
-            form_class = self.get_form_class()
-
-        form = super(OpportunityUpdate, self).get_form(form_class)
-        form.fields['first_name'].widget.attrs = {}
-        form.fields['last_name'].widget.attrs = {}
-        form.fields['address1'].widget.attrs = {}
-        form.fields['address2'].widget.attrs = {}
-        form.fields['city'].widget.attrs = {}
-        form.fields["province"].widget.attrs = {}
-        form.fields['postal_code'].widget = NumberInput(
-            attrs={
-                    "type": "number",
-                    "pattern": "[0-9]{6}",
-                })
-        form.fields['phone_number1'].widget = NumberInput(attrs={
-            "type": "tel",
-            "pattern": "[0-9]{10}",
-        })
-        form.fields['phone_number2'].widget = NumberInput(attrs={
-            "type": "tel",
-            "pattern": "[0-9]{10}",
-        })
-        form.fields['sin'].widget = NumberInput(attrs={
-            "type": "tel",
-            "pattern": "[0-9]{9}",
-        })
-        form.fields['email'].widget.attrs = {
-            "type": "email",
-        }
-        form.fields['dob'].widget = DateInput(
-            attrs={"type": "date"
-        })
-        form.fields['agent'].widget.attrs = {}
-        form.fields['collection_amount'].widget.attrs = {}
-        form.fields['last_agent'].widget.attrs = {}
-        form.fields['collection_date'].widget.attrs = {}
-        form.fields['last_crawl'].widget = DateTimeInput(
-            attrs={
-                "type": "datetime-local",
-            })
-        form.fields['last_result'].widget = DateInput(
-            attrs={"type": "date",
-            })
-        
-        form.fields["prioritize_local"].widget.attrs = {}
-        form.fields["prioritize_global"].widget.attrs = {}
-        form.fields["file_upload"].widget.attrs = {"accept": ".doc, .docx, .pdf"}
-
-        return form
-
-
-class OpportunityUpdateView(OpportunityUpdate):
-
-    """Updating individual opportunities."""
-
-    success_url = reverse_lazy("opportunity_list")
+        return get_form(self, OpportunityUpdate, form_class=form_class)
 
 
 class OpportunityUpdateListView(OpportunityUpdate):
@@ -164,6 +118,7 @@ class OpportunityUpdateListView(OpportunityUpdate):
 class OpportunityUpdateEdit(OpportunityUpdate):
 
     """Update and redirect to edit the form."""
+    pass
 
 
 class OpportunityUpdateCreateView(OpportunityUpdate):

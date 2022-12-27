@@ -20,7 +20,6 @@
                         <div class="col-md-6">{{ form.first_name|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.last_name|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
-                        <div class="col-md-6">{{ form.address1|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.address2|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.city|as_crispy_field }}</div>
                         <div class="col-md-6">{{ form.postal_code|as_crispy_field }}</div>
@@ -45,12 +44,13 @@
                         <div class="col-md-4 mt-3 mt-lg-0">
                             <input type="submit" value="Save">
                         </div>
+                        
 
                         {% if create == "create" %}
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="create/new">Save and Create</button></div>
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="create/edit">Save and Edit</button></div>
                         {% else %}
-                        <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/new/{{id}}">Update and Create New</button></div>
+                        <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update_create/{{id}}">Update and Create New</button></div>
                         <div class="col-md-4 mt-3 mt-lg-0"><button type="submit" formaction="/opportunity/update/edit/{{id}}">Update and Edit</button></div>
                         {% endif %}
                     </div>
